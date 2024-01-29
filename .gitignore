@@ -1,6 +1,10 @@
+# Exclude .vscode/ directory
 .vscode/
+
+# Include specific file types within .vscode/
 !*.c
 !*.h
 !*.md
+
+# Include .gitignore file
 !.gitignore
-*
