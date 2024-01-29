@@ -1,6 +1,6 @@
 .vscode/
-! *.c
-! *.h
-! *.md
-! .gitignore
+!*.c
+!*.h
+!*.md
+!.gitignore
 *
