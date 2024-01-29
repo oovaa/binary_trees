@@ -5,6 +5,7 @@
 !*.c
 !*.h
 !*.md
+^[0-9]*[^.c]
 
 # Include .gitignore file
 !.gitignore
