@@ -19,3 +19,4 @@ int binary_tree_is_full(const binary_tree_t *tree)
 
 	return 0; /* If only one child is present, the tree is not full */
 }
+
