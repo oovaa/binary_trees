@@ -1,13 +1,13 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_balance - measures the balance factor of a binary tree
+ * binary_tree_is_perfect - checks if a binary tree is perfect
  * @tree: Pointer to the root node of the tree
  *
  * Return: if tree is NULL, return 0
  */
 
-int binary_tree_balance(const binary_tree_t *tree)
+int binary_tree_is_perfect(const binary_tree_t *tree)
 {
     if (tree == NULL)
         return (0);
@@ -15,7 +15,13 @@ int binary_tree_balance(const binary_tree_t *tree)
     int leftH = binary_tree_node_height(tree->left, 0);
     int rightH = binary_tree_node_height(tree->right, 0);
 
-    return (leftH - rightH);
+    if (leftH != rightH)
+        return (0);
+
+    if (leftH == rightH)
+        return (1);
+    else
+        return (0);
 }
 
 /**
