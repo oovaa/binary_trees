@@ -1,2 +1,2 @@
 # binary_trees
-Binary tree ALX team project 
+Binary tree ALX team project
