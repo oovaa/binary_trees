@@ -2,7 +2,6 @@
 .vscode/
 
 # Include specific file types within .vscode/
-!*.c
 !*.h
 !*.md
 ^[0-9]*[^.c]
