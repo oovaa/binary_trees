@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 /**
  * binary_tree_is_perfect - checks if a binary tree is perfect
@@ -9,51 +10,31 @@
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-
-	int re = 0, leftH = 0, rightH = 0;
+	int LH = b_height(tree->left);
+	int RH = b_height(tree->right);
 
 	if (tree == NULL)
-	{
-		re = 0;
-		return (re);
-	}
-	leftH = binary_tree_node_height(tree->left, 0);
-	rightH = binary_tree_node_height(tree->right, 0);
+		return 0;
 
-	if (leftH != rightH)
-	{
-		re = 0;
-		return (re);
-	}
-
-	if (leftH == rightH)
-		re = 1;
-	else
-		re = 0;
-
-	return (re);
+	if (LH == RH)
+		return 1;
+	return 0;
 }
 
 /**
- * binary_tree_node_height - calculate height of subtree rooted at given node.
+ * b_height - calculate height of subtree rooted at given node.
  * @node: pointer to the root node of the current subtree
  * @H: current height of subtree
  * Return: Height
  */
 
-int binary_tree_node_height(const binary_tree_t *node, int H)
+int b_height(const binary_tree_t *node)
 {
-	int re = 0, leftH = 0, rightH = 0;
-
 	if (node == NULL)
-	{
-		re = H;
-		return (re);
-	}
+		return (0);
 
-	leftH = binary_tree_node_height(node->left, H + 1);
-	rightH = binary_tree_node_height(node->right, H + 1);
-	re = leftH > rightH ? leftH : rightH;
+	int LH = b_height(node->left);
+	int RH = b_height(node->right);
 
-	return (re);
+	return (1 + MAX(LH, RH));
 }
