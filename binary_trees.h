@@ -54,6 +54,6 @@ int binary_tree_is_full(const binary_tree_t *tree);
 
 /*MADE BY USA*/
 int binary_tree_node_height(const binary_tree_t *node, int H);
-
+int is_leaf(const binary_tree_t *node);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 #endif /* _BINARY_TREES_H_ */

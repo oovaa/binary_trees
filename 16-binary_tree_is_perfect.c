@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 /**
  * binary_tree_is_perfect - checks if a binary tree is perfect
@@ -18,7 +17,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	left_height = binary_tree_node_height(tree->left, 0);
 	right_height = binary_tree_node_height(tree->right, 0);
 
-	if (left_height == right_height && binary_tree_is_perfect(tree->left) && binary_tree_is_perfect(tree->right))
+	if (left_height == right_height)
 		return 1;
 
 	return 0;
@@ -42,4 +41,14 @@ int binary_tree_node_height(const binary_tree_t *node, int H)
 	right_height = binary_tree_node_height(node->right, H + 1);
 
 	return (left_height > right_height ? left_height : right_height);
+}
+
+/**
+ * is_leaf - check if leaf
+ * @node: pointer to node to check
+ * Return: 1 leaf 0 other
+ */
+int is_leaf(const binary_tree_t *node)
+{
+	return (node && node->left == NULL && node->right == NULL);
 }
