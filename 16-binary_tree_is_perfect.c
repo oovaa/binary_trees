@@ -10,11 +10,14 @@
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int LH;
+	int RH;
+
 	if (tree == NULL)
 		return 1;
 
-	int LH = b_height(tree->left);
-	int RH = b_height(tree->right);
+	LH = b_height(tree->left);
+	RH = b_height(tree->right);
 
 	if (LH == RH && binary_tree_is_perfect(tree->left) && binary_tree_is_perfect(tree->right))
 		return 1;
