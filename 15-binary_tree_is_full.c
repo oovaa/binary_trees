@@ -9,13 +9,13 @@
 int binary_tree_is_full(const binary_tree_t *tree)
 {
 	if (!tree)
-		return 0;
+		return (0);
 
 	if (!tree->left && !tree->right)
-		return 1; /* Leaf nodes are considered full */
+		return (1); /* Leaf nodes are considered full */
 
 	if (tree->left && tree->right)
-		return binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right);
+		return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
 
-	return 0; /* If only one child is present, the tree is not full */
+	return (0); /* If only one child is present, the tree is not full */
 }
