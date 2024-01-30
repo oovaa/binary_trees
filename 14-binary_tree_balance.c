@@ -14,35 +14,33 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (re);
 
-	leftH = binary_tree_node_height(tree->left, 0);
-	rightH = binary_tree_node_height(tree->right, 0);
+	if (tree->left)
+		leftH = binary_tree_node_height(tree->left, 0);
+
+	if (tree->right)
+		rightH = binary_tree_node_height(tree->right, 0);
+
 	re = leftH - rightH;
 
 	return (re);
 }
 
 /**
- * binary_tree_node_height - calculate height of subtree rooted at node.
+ * binary_tree_node_height - calculate height of subtree rooted at given node.
  * @node: pointer to the root node of the current subtree
  * @H: current height of subtree
- * Return: Height
+ * Return: Height of the subtree
  */
 
 int binary_tree_node_height(const binary_tree_t *node, int H)
 {
-	int re = 0, leftH = 0, rightH = 0;
+	int left_height, right_height;
 
 	if (node == NULL)
-	{
-		re = H;
-		return (re);
-	}
-	if (node->left)
-		leftH = binary_tree_node_height(node->left, H + 1);
-	if (node->right)
-		rightH = binary_tree_node_height(node->right, H + 1);
+		return (H);
 
-	re = (leftH > rightH) ? leftH : rightH;
+	left_height = binary_tree_node_height(node->left, H + 1);
+	right_height = binary_tree_node_height(node->right, H + 1);
 
-	return (re);
+	return (left_height > right_height ? left_height : right_height);
 }
