@@ -8,57 +8,56 @@
 int binary_tree_is_complete(const binary_tree_t *tree);
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int in = -1;  /*index for going in*/
-	int out = -1; /*index for going out */
-	binary_tree_t **q = malloc(sizeof(binary_tree_t *) * 1000);
+    int in = -1;  /*index for going in*/
+    int out = -1; /*index for going out */
+    binary_tree_t **q = malloc(sizeof(binary_tree_t *) * 1000);
 
-	if (q == NULL) /*mem alloc failed = 0*/
-		return (0);
+    if (q == NULL) /*mem alloc failed = 0*/
+        return (0);
 
-	if (tree == NULL) /*empty = 0*/
-	{
-		free(q);
-		return (0);
-	}
+    if (tree == NULL) /*empty = 0*/
+    {
+        free(q);
+        return (0);
+    }
 
-	q[in + 1] = (binary_tree_t *)tree; /*root goes in*/
+    q[in + 1] = (binary_tree_t *)tree; /*root goes in*/
 
-	for (; in > out; out = out + 1) /*level traversal*/
-	{
-		binary_tree_t *now = q[out]; /*node goes out*/
+    for (; in > out; out = out + 1) /*level traversal*/
+    {
+        binary_tree_t *now = q[out]; /*node goes out*/
 
-		if (now == NULL) /*if current node is NULL, check if complete*/
-		{
-			/*check next nodes till non-NULL one*/
-			while (in > out)
-			{
-				now = q[out]; /*out to process*/
+        if (now == NULL) /*if current node is NULL, check if complete*/
+        {
+            /*check next nodes till non-NULL one*/
+            while (in > out)
+            {
+                now = q[out]; /*out to process*/
 
-				if (now == NULL) /*if non-null node is found after null, return 0*/
-				{
-					printf("Null node found.\n");
-					return (0);
-				}
+                if (now == NULL) /*if non-null node is found after null, return 0*/
+                {
+                    return (0);
+                }
 
-				out = out + 1; /*go to next element*/
+                out = out + 1; /*go to next element*/
 
-				if (now->left)
-				{
-					q[++in] = now->left; /*left goes in next empty space (++in)*/
-				}
+                if (now->left)
+                {
+                    q[++in] = now->left; /*left goes in next empty space (++in)*/
+                }
 
-				if (now->right)
-				{
-					q[++in] = now->right; /*right goes in*/
-				}
-			}
-		}
-		else /*L&R children for non-null node goes in*/
-		{
-			q[++in] = now->left;  /*left goes in next empty space (++in)*/
-			q[++in] = now->right; /*right goes in*/
-		}
-	}
-	free(q);
-	return (1); /*if all is there, tree is complete*/
+                if (now->right)
+                {
+                    q[++in] = now->right; /*right goes in*/
+                }
+            }
+        }
+        else /*L&R children for non-null node goes in*/
+        {
+            q[++in] = now->left;  /*left goes in next empty space (++in)*/
+            q[++in] = now->right; /*right goes in*/
+        }
+    }
+    free(q);
+    return (1); /*if all is there, tree is complete*/
 }
