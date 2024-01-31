@@ -8,9 +8,12 @@
  */
 int BT_height(const binary_tree_t *tree)
 {
+	int lef, rig;
+
 	if (tree)
 	{
-		int lef = 0, rig = 0;
+		lef = 0;
+		rig = 0;
 
 		lef = tree->left ? 1 + BT_height(tree->left) : 0;
 		rig = tree->right ? 1 + BT_height(tree->right) : 0;
@@ -52,11 +55,15 @@ int is_BST(const binary_tree_t *tree)
  */
 int all_heights_are_ok(const binary_tree_t *tree)
 {
+
+	int left_height;
+	int right_height;
+
 	if (!tree)
 		return (1);
 
-	int left_height = BT_height(tree->left);
-	int right_height = BT_height(tree->right);
+	left_height = BT_height(tree->left);
+	right_height = BT_height(tree->right);
 
 	if (left_height > 1 || right_height > 1)
 		return (0);
