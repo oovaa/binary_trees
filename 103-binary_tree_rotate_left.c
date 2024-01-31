@@ -9,7 +9,7 @@
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 {
 	/* we are given the root we should replace it with it's right kid*/
-	if (!tree | !tree->right)
+	if (!tree || !tree->right)
 		return (NULL);
 
 	binary_tree_t *lc = tree->right, *the_parent = tree->parent;
@@ -20,12 +20,16 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 
 	lc->left = tree;
 
-	if (the_parent->left == tree)
-		the_parent->left = lc;
-	else
-		the_parent->right = lc;
+	if (the_parent)
+	{
+		if (the_parent->left == tree)
+			the_parent->left = lc;
+		else
+			the_parent->right = lc;
+	}
 
+	lc->parent = the_parent;
 	tree->parent = lc;
 
-	return (NULL);
+	return (lc);
 }
