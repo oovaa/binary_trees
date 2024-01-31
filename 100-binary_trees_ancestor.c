@@ -7,11 +7,29 @@
  * Return: ptr to lowest common ancestor or NULL
  */
 
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *
+										 first,
+									 const binary_tree_t *second)
 {
-    if (first == NULL || second == NULL)
-        return (NULL);
+	binary_tree_t *fa, *sa; /* first ancestor, second ancestor */
 
+	if (first == NULL || second == NULL)
+		return (NULL);
 
-    return NULL;
+	fa = (binary_tree_t *)first;
+
+	while (fa)
+	{
+		sa = (binary_tree_t *)second;
+		while (sa)
+		{
+			if (fa == sa)
+				return (fa);
+
+			sa = sa->parent;
+		}
+		fa = fa->parent;
+	}
+
+	return (NULL);
 }
