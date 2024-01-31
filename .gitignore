@@ -1,10 +1,7 @@
-# Exclude .vscode/ directory
-.vscode/
+# Ignore all files except .c, .h, and .md
+*
 
-# Include specific file types within .vscode/
+# Allow .c, .h, and .md files
+!*.c
 !*.h
 !*.md
-^[0-9]*[^.c]
-
-# Include .gitignore file
-!.gitignore
