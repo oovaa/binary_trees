@@ -60,5 +60,6 @@ binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 /* ADVANCED */
 
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
+binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree);
 
 #endif /* _BINARY_TREES_H_ */
