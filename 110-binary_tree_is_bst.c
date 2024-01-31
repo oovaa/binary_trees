@@ -10,8 +10,9 @@
 
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-    int before = INT_MIN;
-    return (tree == NULL) ? 0 : bst_inorder(tree, &before);
+	int before = INT_MIN;
+
+	return ((tree == NULL) ? 0 : bst_inorder(tree, &before));
 }
 
 /**
@@ -23,15 +24,15 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 
 int bst_inorder(const binary_tree_t *node, int *before)
 {
-    if (node == NULL)
-        return (1);
+	if (node == NULL)
+		return (1);
 
-    /* checking left tree*/
-    /*checking current node*/
-    /*update previous value to current node value*/
-    /*check right tree*/
+	/* checking left tree*/
+	/*checking current node*/
+	/*update previous value to current node value*/
+	/*check right tree*/
 
-    return (bst_inorder(node->left, before) &&
-            (node->n > *before ? (*before = node->n, true) : false) &&
-            bst_inorder(node->right, before));
+	return (bst_inorder(node->left, before) &&
+			(node->n > *before ? (*before = node->n, true) : false) &&
+			bst_inorder(node->right, before));
 }
