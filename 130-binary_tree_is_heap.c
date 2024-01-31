@@ -8,20 +8,24 @@
  */
 int binary_tree_is_heap(const binary_tree_t *tree)
 {
+	int lv = 1, rv = 1;
+
+	/* if the tree ended then it is a heap */
 	if (!tree)
 		return (1);
 
-	int left_check, right_check;
+	/* if the left kid is not ok, or its kids are not max heaps, return 0 */
+	if (tree->left && tree->left->n > tree->n)
+		lv = 0;
+	else
+		lv = binary_tree_is_heap(tree->left);
 
-	if (tree->left && !(tree->left->n < tree->n))
-		return (0);
+	/* if the right kid is not ok, or its kids are not max heaps, return 0 */
+	if (tree->right && tree->right->n > tree->n)
+		rv = 0;
+	else
+		rv = binary_tree_is_heap(tree->right);
 
-	left_check = binary_tree_is_heap(tree->left);
-
-	if (tree->right && !(tree->right->n < tree->n))
-		return (0);
-
-	right_check = binary_tree_is_heap(tree->right);
-
-	return (left_check && right_check);
+	/* return 1 only if both left and right subtrees are max heaps */
+	return (lv && rv);
 }
