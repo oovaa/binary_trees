@@ -73,4 +73,6 @@ int binary_tree_is_heap(const binary_tree_t *tree);
 int binary_tree_is_bst(const binary_tree_t *tree);
 int bst_inorder(const binary_tree_t *node, int *prev);
 
+heap_t *heap_insert(heap_t **root, int value);
+
 #endif /* _BINARY_TREES_H_ */
