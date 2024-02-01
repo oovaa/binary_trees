@@ -1,129 +1,99 @@
 #include "binary_trees.h"
+heap_t *insert_recursive(heap_t *root, int value);
+heap_t *swap_up(heap_t *node);
+void swap_values(int *a, int *b);
 
 /**
- * binary_tree_is_full - Checks if a binary tree is full
- * @tree: Pointer to the root node of the tree to check
+ * heap_insert - Inserts a value in a Max Binary Heap.
  *
- * Return: 1 if the tree is full, 0 otherwise
+ * @root: A double pointer to the root node of the Heap.
+ * @value: The value to insert into the heap.
+ *
+ * Return: A pointer to the created node, or NULL on failure.
  */
-int binary_tree_is_full(const binary_tree_t *tree)
+heap_t *heap_insert(heap_t **root, int value)
 {
-	if (!tree)
-		return (0);
+	if (!root)
+		return (NULL);
 
-	if (!tree->left && !tree->right)
-		return (1); /* Leaf nodes are considered full */
+	if (!(*root))
+		return (*root = binary_tree_node(NULL, value));
 
-	if (tree->left && tree->right)
-		return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
-
-	return (0); /* If only one child is present, the tree is not full */
+	return (insert_recursive(*root, value));
 }
 
 /**
- * Heapify - Performs heapify operation on a heap.
- * @root: Pointer to the root node of the heap.
+ * insert_recursive - Recursively inserts a value into the Max Binary Heap.
+ *
+ * @root: A pointer to the root node of the Heap.
+ * @value: The value to insert.
+ *
+ * Return: A pointer to the created node.
  */
-void Heapify(heap_t **root)
+heap_t *insert_recursive(heap_t *root, int value)
 {
-	heap_t *tmp, *new_root;
-
-	if (!root || !*root)
-		return;
-
-	new_root = *root;
-
-	while (new_root->parent && new_root->parent->n < new_root->n)
+	if (!root->left)
 	{
-		tmp = new_root->parent;
-
-		if (tmp->left == new_root)
-			tmp->left = new_root->left;
-		else
-			tmp->right = new_root->left;
-
-		if (new_root->left)
-			new_root->left->parent = tmp;
-
-		new_root->left = tmp;
-
-		if (tmp->right)
-			tmp->right->parent = new_root;
-
-		new_root->parent = tmp->parent;
-
-		if (tmp->parent)
-		{
-			if (tmp->parent->left == tmp)
-				tmp->parent->left = new_root;
-			else
-				tmp->parent->right = new_root;
-		}
-		else
-		{
-			*root = new_root;
-		}
-
-		tmp->parent = new_root;
+		root->left = binary_tree_node(root, value);
+		return (swap_up(root->left));
+	}
+	else if (!root->right)
+	{
+		root->right = binary_tree_node(root, value);
+		return (swap_up(root->right));
+	}
+	else if (binary_tree_size(root->left) <= binary_tree_size(root->right))
+	{
+		return (insert_recursive(root->left, value));
+	}
+	else
+	{
+		return (insert_recursive(root->right, value));
 	}
 }
 
 /**
- * insert_max_left - Inserts a node with the maximum value to the left.
- * @root: Pointer to the root node of the heap.
- * @node: Pointer to the node to be inserted.
+ * swap_up - Swaps the node up the Max Binary Heap.
  *
- * Return: Pointer to the newly inserted node.
+ * @node: A pointer to the node to swap.
+ *
+ * Return: A pointer to the swapped node.
  */
-heap_t *insert_max_left(heap_t **root, heap_t *node)
+heap_t *swap_up(heap_t *node)
 {
-	heap_t *cur;
-
-	if (*root == NULL)
+	while (node->parent && node->n > node->parent->n)
 	{
-		*root = node;
-		return (node);
+		swap_values(&(node->n), &(node->parent->n));
+		node = node->parent;
 	}
-
-	cur = *root;
-
-	while ((*root)->left)
-		cur = cur->left;
-
-	cur->left = node;
-	node->parent = cur;
-
-	Heapify(&node);
 
 	return (node);
 }
 
 /**
- * heap_insert - Inserts a value into a max binary heap.
- * @root: Pointer to the root node of the heap.
- * @value: Value to be inserted into the heap.
+ * swap_values - Swaps the values of two integers.
  *
- * Return: Pointer to the newly inserted node, or NULL on failure.
+ * @a: Pointer to the first integer.
+ * @b: Pointer to the second integer.
  */
-heap_t *heap_insert(heap_t **root, int value)
+void swap_values(int *a, int *b)
 {
-	heap_t *new_node, *cur;
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
-	if (!root || !*root)
-		return (NULL);
+/**
+ * binary_tree_size - Measures the size of a binary tree.
+ *
+ * @tree: A pointer to the tree to be measured.
+ *
+ * Return: Size of the tree, 0 if tree is NULL.
+ */
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
 
-	cur = *root;
-	new_node = binary_tree_node(NULL, value);
-
-	if (binary_tree_is_full(cur))
-	{
-		if (!cur->parent)
-		{
-			return (insert_max_left(root, new_node));
-		}
-
-		cur = cur->parent->right;
-	}
-
-	return (new_node);
+	return (binary_tree_size(tree->left) + binary_tree_size(tree->right) + 1);
 }
