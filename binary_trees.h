@@ -74,5 +74,8 @@ int binary_tree_is_bst(const binary_tree_t *tree);
 int bst_inorder(const binary_tree_t *node, int *prev);
 
 heap_t *heap_insert(heap_t **root, int value);
+bst_t *bst_insert(bst_t **tree, int value);
+bst_t *bst_in_recur(bst_t *curr_n, int val);
+bst_t *bst_search(const bst_t *tree, int value);
 
 #endif /* _BINARY_TREES_H_ */
