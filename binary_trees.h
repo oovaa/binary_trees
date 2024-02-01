@@ -78,5 +78,6 @@ bst_t *bst_insert(bst_t **tree, int value);
 bst_t *bst_in_recur(bst_t *curr_n, int val);
 bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
+heap_t *array_to_heap(int *array, size_t size);
 
 #endif /* _BINARY_TREES_H_ */
