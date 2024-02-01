@@ -10,10 +10,12 @@
  */
 heap_t *array_to_heap(int *array, size_t size)
 {
+	heap_t *root;
+
 	if (!array || size == 0)
 		return (NULL);
 
-	heap_t *root = binary_tree_node(NULL, array[0]);
+	root = binary_tree_node(NULL, array[0]);
 
 	if (!root)
 		return (NULL);
