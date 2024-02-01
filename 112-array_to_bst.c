@@ -9,8 +9,9 @@
 bst_t *array_to_bst(int *array, size_t size)
 {
     bst_t *root = NULL;
+    size_t i;
 
-    for (size_t i = 0; array && i < size; bst_insert(&root, array[i]))
+    for (i = 0; array && i < size; bst_insert(&root, array[i]))
         ;
 
     return (root);
