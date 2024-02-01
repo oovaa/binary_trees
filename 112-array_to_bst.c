@@ -8,11 +8,16 @@
 
 bst_t *array_to_bst(int *array, size_t size)
 {
-    bst_t *root = NULL;
     size_t i;
+    bst_t *root = NULL;
 
-    for (i = 0; array && i < size; bst_insert(&root, array[i]))
-        ;
-
+    for (i = 0; i < size; i++)
+    {
+        if (bst_insert(&root, array[i]) == NULL)
+        {
+            free(root);
+            return (NULL);
+        }
+    }
     return (root);
 }
